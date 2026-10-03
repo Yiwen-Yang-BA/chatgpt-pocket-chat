@@ -13,10 +13,23 @@ const schema = objectSchema({title: stringSchema(), tasks: arraySchema(objectSch
 const structured = {title: 'Plan', tasks: [{name: 'First step', done: false}]};
 const complete = (text, annotations = []) => ({status: 'completed', output: [{type: 'message', content: [{type: 'output_text', text, annotations}]}], usage: {input_tokens: 10, output_tokens: 20, total_tokens: 30}});
 
+// OS-assigned ephemeral ports can hit a Fetch-forbidden port on Windows.
+// Use a safe high range, retaining collision retries for parallel test runs.
+let nextTestPort = 30000 + (process.pid % 10000);
 async function listen(server) {
-  server.listen(0, '127.0.0.1');
-  await once(server, 'listening');
-  return `http://127.0.0.1:${server.address().port}`;
+  for (let attempt = 0; attempt < 100; attempt++) {
+    const port = nextTestPort;
+    nextTestPort = port === 39999 ? 30000 : port + 1;
+    try {
+      const listening = once(server, 'listening');
+      server.listen(port, '127.0.0.1');
+      await listening;
+      return `http://127.0.0.1:${port}`;
+    } catch (error) {
+      if (!['EADDRINUSE', 'EACCES'].includes(error.code)) throw error;
+    }
+  }
+  throw new Error('No available test port in the safe range 30000–39999.');
 }
 
 async function close(server) {
