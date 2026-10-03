@@ -1,0 +1,31 @@
+{
+  "id": "chatgpt-pocket-chat",
+  "title": "Pocket Chat",
+  "number": 1,
+  "port": 3101,
+  "symbol": "P",
+  "nav": "多会话聊天",
+  "eyebrow": "A QUIETER SPACE TO THINK",
+  "headline": "想法，在对话中展开。",
+  "description": "一个安静的 AI 对话空间。用不同角色探索问题，把有价值的回答留下来。",
+  "features": [
+    "独立会话与本地历史、可编辑会话名称",
+    "写作 / 编程 / 学习角色与自定义系统提示词",
+    "连续对话、重新生成、取消请求",
+    "会话搜索、Markdown 导出、JSON 备份与导入"
+  ],
+  "steps": [
+    "新建会话，选择角色；也可以展开角色设置修改系统提示词。",
+    "输入消息，按 Enter 发送；Shift+Enter 换行。演示回复明确标识为本地模板。",
+    "使用重新生成或停止；会话历史会保存在当前浏览器。",
+    "导出当前会话为 Markdown，或备份全部会话为 JSON。"
+  ],
+  "source": {
+    "name": "ChatGPTNextWeb/NextChat",
+    "url": "https://github.com/ChatGPTNextWeb/NextChat",
+    "stars": 88824,
+    "pushed": "2026-08-11",
+    "license": "MIT"
+  },
+  "scope": "实现 NextChat 的轻量多会话与角色交互。暂不包含图片、语音、账号同步、插件、付费套餐和流式响应；整条模型结果完成后显示。"
+}

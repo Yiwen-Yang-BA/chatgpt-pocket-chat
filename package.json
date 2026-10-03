@@ -1,0 +1,17 @@
+{
+  "name": "chatgpt-pocket-chat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "一个安静的 AI 对话空间。用不同角色探索问题，把有价值的回答留下来。",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "dev": "node --watch --env-file-if-exists=.env server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check server.mjs && node --check project.mjs && node --check public/app.js"
+  },
+  "license": "MIT"
+}
